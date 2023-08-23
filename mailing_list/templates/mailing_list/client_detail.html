@@ -1,0 +1,16 @@
+{% extends 'mailing_list/base_template.html' %}
+{% block content %}
+<div class="card">
+  <div class="card-header fw-normal text-body-emphasis">
+    {{object}}
+  </div>
+  <div class="card-body">
+    <p class="card-text"><b>Почта</b>:  {{object.email}}</p>
+    <p class="card-text"><b>Комментарий</b>:  {{object.commentary}}</p>
+    <div class="col-sm-6">
+    <a href="{% url 'mailing_list:client_update' object.pk %}" class="btn btn-primary">Редактировать</a>
+      <a href="{% url 'mailing_list:delete_client' object.pk %}" class="btn btn-danger">Удалить</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

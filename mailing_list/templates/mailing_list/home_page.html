@@ -1,0 +1,26 @@
+{% extends 'mailing_list/base_template.html' %}
+{% block content %}
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal text-body-emphasis">Сервис для создания рассылок</h1>
+      <p class="fs-5 text-body-secondary">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
+    </div>
+  <main>
+    <div class="row row-cols-1 row-cols-md-2 mb-6 text-center">
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <a href="{% url 'mailing_list:client_list' %}">
+            <button type="button" class="w-100 btn btn-lg btn-outline-success">Список клиентов</button>
+          </a>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <a href="{% url 'mailing_list:message_list' %}">
+            <button type="button" class="w-100 btn btn-lg btn-outline-success">Доступные рассылки</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}

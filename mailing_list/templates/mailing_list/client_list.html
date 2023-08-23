@@ -1,0 +1,22 @@
+{% extends 'mailing_list/base_template.html' %}
+{% block content %}
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal text-body-emphasis">Клиенты</h1>
+    </div>
+
+{% for client in object_list %}
+<div class="card" style="width: 18rem;">
+    <div class="card-header py-3"><a href="{% url 'mailing_list:client' client.pk %}">
+        {{client}}
+    </a>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{client.email}}</li>
+        <li class="list-group-item">
+            <a href="{% url 'mailing_list:client_update' client.pk %}"><button type="button" class="btn btn-sm">Редактировать</button></a>
+            <a href="{% url 'mailing_list:delete_client' client.pk %}"><button type="button" class="btn btn-sm">Удалить</button></a>
+        </li>
+    </ul>
+    {% endfor %}
+</div>
+{% endblock %}

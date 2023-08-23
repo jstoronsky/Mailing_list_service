@@ -1,0 +1,20 @@
+{% extends 'mailing_list/base_template.html' %}
+{% block content %}
+<div class="card">
+  <div class="card-header fw-normal text-body-emphasis">
+    {{object}}
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{object.body}}</p>
+    <hr>
+    <p class="card-text"><b>Статус</b>:  {{object.status}}</p>
+    <p class="card-text"><b>Дата начала рассылки</b>:  {{object.time_to_start}}</p>
+    <p class="card-text"><b>Дата завершения рассылки</b>:  {{object.time_to_end}}</p>
+    <p class="card-text"><b>Периодичность отправления писем</b>: every {{object.custominterval.every}} {{object.custominterval.period}}</p>
+    <div class="col-sm-6">
+    <a href="{% url 'mailing_list:message_update' object.pk %}" class="btn btn-primary">Редактировать</a>
+      <a href="{% url 'mailing_list:delete_message' object.pk %}" class="btn btn-danger">Удалить</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

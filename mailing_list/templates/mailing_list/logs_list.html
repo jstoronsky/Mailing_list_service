@@ -1,0 +1,19 @@
+{% extends 'mailing_list/base_template.html' %}
+{% block content %}
+<div class="col-6">
+    <div class="card" style="width: 18rem;">
+        {% for log in object_list %}
+        <div class="card-header py-3"><a href="{% url 'mailing_list:logsdetail' log.pk %}">
+            Информация по рассылке "{{log}}"
+        </a>
+        </div>
+<!--        <ul class="list-group list-group-flush">-->
+<!--            <li class="list-group-item">{{log.datetime_of_attempt}}</li>-->
+<!--        </ul>-->
+<!--        <ul class="list-group list-group-flush">-->
+<!--            <li class="list-group-item">{{log.status}}</li>-->
+<!--        </ul>-->
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

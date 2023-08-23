@@ -1,0 +1,15 @@
+{% extends 'mailing_list/base_template.html' %}
+{% block content %}
+<div class="col">
+    <div class="card" style="width: 18rem;">
+        {% for log in object.logs_set.all %}
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Попытка {{forloop.counter}}</li>
+        </ul>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{log.datetime_of_attempt}} {{log.status}}</li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
