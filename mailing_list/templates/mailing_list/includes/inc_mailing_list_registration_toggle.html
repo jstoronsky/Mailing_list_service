@@ -1,15 +1,21 @@
+{% load my_tags %}
 <div class="dropdown">
-    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong></strong>
+    <a href="#" class="d-flex align-items-center text-blue text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="{% mediapath user.avatar %}" alt="" width="32" height="32" class="rounded-circle me-2">
+        <strong>{{user.email}}</strong>
     </a>
     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item" href="">Выйти</a></li>
-        <li><a class="dropdown-item" href="">Профиль</a></li>
-        <li><a class="dropdown-item" href="">Войти</a></li>
-        <li><a class="dropdown-item" href="">Регистрация</a></li>
-        <li><a class="dropdown-item" href="">Сбросить пароль</a></li>
+        {% if user.is_authenticated %}
+        <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
+        <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
+        {% else %}
+        <li><a class="dropdown-item" href="{% url 'users:login' %}">Войти</a></li>
+        <li><a class="dropdown-item" href="{% url 'users:register' %}">Регистрация</a></li>
+        <li><a class="dropdown-item" href="{% url 'users:reset' %}">Сбросить пароль</a></li>
+        {% endif %}
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">!!!</a></li>
+        {% if user.is_staff or user.is_superuser %}
+        <li><a class="dropdown-item" href="{% url 'users:users_list' %}">Управление пользователями</a></li>
+        {% endif %}
     </ul>
 </div>

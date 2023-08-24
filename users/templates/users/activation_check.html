@@ -1,0 +1,39 @@
+{% extends 'mailing_list/base_template.html' %}
+{% block content %}
+<header>
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
+            <span class="fs-4"></span>
+        </a>
+        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#"></a>
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#"></a>
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#"></a>
+        </nav>
+    </div>
+    <div class="row-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal text-body-emphasis">Введите код, отправленный на вашу почту</h1>
+        <h1>&nbsp;</h1>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body text-black">
+                    <h6>Код</h6>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="code">
+                        </div>
+                        <button type="submit" class="btn btn-primary form-control">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}

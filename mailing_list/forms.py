@@ -1,5 +1,5 @@
 from django import forms
-from mailing_list.models import Client, Message, CustomInterval
+from mailing_list.models import Client, Message, SettingsMailing
 
 
 class MixinStyle:
@@ -12,7 +12,7 @@ class MixinStyle:
 class MessageAddForm(MixinStyle, forms.ModelForm):
     class Meta:
         model = Message
-        fields = ('header', 'body', 'time_to_start', 'time_to_end')
+        fields = ('header', 'body', 'user')
         # fields = '__all__'
         # exclude = ('product_image')
 
@@ -20,7 +20,7 @@ class MessageAddForm(MixinStyle, forms.ModelForm):
 class MessageUpdateForm(MixinStyle, forms.ModelForm):
     class Meta:
         model = Message
-        fields = ('header', 'body', 'time_to_start', 'time_to_end')
+        fields = ('header', 'body')
         # fields = '__all__'
         # exclude = ('product_image')
 
@@ -28,7 +28,7 @@ class MessageUpdateForm(MixinStyle, forms.ModelForm):
 class ClientAddForm(MixinStyle, forms.ModelForm):
     class Meta:
         model = Client
-        fields = ('last_name', 'first_name', 'middle_name', 'email', 'commentary')
+        fields = ('last_name', 'first_name', 'middle_name', 'email', 'commentary', 'user')
 
 
 class ClientUpdateForm(MixinStyle, forms.ModelForm):
@@ -37,7 +37,7 @@ class ClientUpdateForm(MixinStyle, forms.ModelForm):
         fields = '__all__'
 
 
-class CustomIntervalAddForm(MixinStyle, forms.ModelForm):
+class SettingsAddForm(MixinStyle, forms.ModelForm):
     class Meta:
-        model = CustomInterval
+        model = SettingsMailing
         fields = '__all__'

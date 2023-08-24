@@ -11,6 +11,7 @@ class Client(models.Model):
     middle_name = models.CharField(max_length=50, verbose_name='отчество', **NULLABLE)
     last_name = models.CharField(max_length=100, verbose_name='фамилия')
     commentary = models.TextField(verbose_name='комментарий')
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='добавил клиента')
 
     def __str__(self):
         return f'{self.last_name} {self.first_name}'
@@ -21,11 +22,9 @@ class Client(models.Model):
 
 
 class Message(models.Model, ):
-    time_to_start = models.DateTimeField(verbose_name='время начала рассылки(формат следующий: YYYY-MM-DD HH:MM:SS)', **NULLABLE)
-    time_to_end = models.DateTimeField(verbose_name='время завершения рассылки(формат следующий: YYYY-MM-DD HH:MM:SS)', **NULLABLE)
-    status = models.CharField(default='создана', max_length=50, verbose_name='статус рассылки')
     header = models.CharField(max_length=300, verbose_name='заголовок')
     body = models.TextField(verbose_name='содержание')
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='создал рассылку')
 
     def __str__(self):
         return self.header
@@ -36,8 +35,8 @@ class Message(models.Model, ):
 
 
 class Logs(models.Model):
-    SENT = "отправлено"
-    NO_SENT = "не отправлено"
+    SENT = "Отправлено"
+    NO_SENT = "Не отправлено"
 
     STATUS_CHOICES = [
         (SENT, "Отправлено"),
@@ -52,9 +51,21 @@ class Logs(models.Model):
         verbose_name_plural = 'логи'
 
 
-class CustomInterval(IntervalSchedule):
+class SettingsMailing(IntervalSchedule):
+    CREATED = "Создана"
+    IN_PROCESS = 'Идёт рассылка'
+    OVER = "Завершена"
+
+    STATUS_CHOICES = [
+        (CREATED, "Создана"),
+        (IN_PROCESS, 'Идёт рассылка'),
+        (OVER, "Завершена"),
+    ]
     message = models.OneToOneField('Message', on_delete=models.CASCADE, verbose_name='рассылка')
+    time_to_start = models.DateTimeField(verbose_name='время начала рассылки(формат следующий: YYYY-MM-DD HH:MM:SS)', **NULLABLE)
+    time_to_end = models.DateTimeField(verbose_name='время завершения рассылки(формат следующий: YYYY-MM-DD HH:MM:SS)', **NULLABLE)
+    status = models.CharField(default=CREATED, max_length=50, choices=STATUS_CHOICES, verbose_name='статус рассылки')
 
     class Meta:
-        verbose_name = 'интервал'
-        verbose_name_plural = 'интервалы'
+        verbose_name = 'настройки рассылки'
+        verbose_name_plural = 'настройки рассылок'

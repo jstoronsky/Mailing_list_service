@@ -129,9 +129,13 @@
       </a>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        {% if user.is_authenticated %}
+            {% if request.user.groups.all.0.name != 'Managers' %}
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'mailing_list:add_message' %}">Создать рассылку</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'mailing_list:add_client' %}">Добавить клиента</a>
+            {% endif %}
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'mailing_list:logs' %}">Логи по рассылкам</a>
+        {% endif %}
         {% include 'mailing_list/includes/inc_mailing_list_registration_toggle.html' %}
       </nav>
     </div>
@@ -146,32 +150,32 @@
         <small class="d-block mb-3 text-body-secondary">&copy; 2017–2023</small>
       </div>
       <div class="col-6 col-md">
-        <h5>Features</h5>
+        <h5>FAQ</h5>
         <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
         </ul>
       </div>
       <div class="col-6 col-md">
-        <h5>Resources</h5>
+        <a href="{% url 'blog:blog' %}"><h5>Блог</h5></a>
         <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
         </ul>
       </div>
       <div class="col-6 col-md">
         <h5>About</h5>
         <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"></a></li>
         </ul>
       </div>
     </div>

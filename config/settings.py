@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mailing_list',
     'users',
+    'blog',
     'django_celery_beat',
     'django_celery_results',
 ]
@@ -67,6 +68,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'my_tags': 'mailing_list.templatetags.my_tags', }
         },
     },
 ]
@@ -144,6 +147,10 @@ EMAIL_HOST_USER = 'jstoronsky@mail.ru'
 EMAIL_HOST_PASSWORD = '3u30HNH3Tut5cRnuM3sU'
 EMAIL_USE_SSL = True
 
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']

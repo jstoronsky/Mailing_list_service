@@ -1,0 +1,27 @@
+{% extends 'mailing_list/base_template.html' %}
+{% block content %}
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body text-black">
+
+                        {% csrf_token %}
+                        <!--                        <p>-->
+                        <!--    <label for="id_id">id</label>-->
+                        <!--    <input type="number" name="id" required id="id_id">-->
+                        <!--                        </p>-->
+                        {{ form.as_p }}
+                        {% if not object %}
+                        <button type="submit" class="btn btn-success">Регистрация</button>
+                        {% else %}
+                        <button type="submit" class="btn btn-success">Редактировать</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

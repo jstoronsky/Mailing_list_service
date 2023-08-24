@@ -14,7 +14,7 @@
                         <h4 class="my-0 fw-normal">{{message}}</h4></a>
                 </div>
                 <div class="card-body">
-                    <h1 class="card-title pricing-card-title">{{message.status}}<small class="text-body-secondary fw-light"></small></h1>
+                    <h1 class="card-title pricing-card-title">{{message.settingsmailing.status}}<small class="text-body-secondary fw-light"></small></h1>
 <!--                    <button type="button" class="w-100 btn btn-lg btn-outline-primary">Запустить</button>-->
                     <a href="{% url 'mailing_list:message_update' message.pk %}"><button type="button" class="btn btn-sm">Редактировать</button></a>
                     <a href="{% url 'mailing_list:delete_message' message.pk %}"><button type="button" class="btn btn-sm">Удалить</button></a>

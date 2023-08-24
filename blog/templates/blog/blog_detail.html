@@ -1,0 +1,34 @@
+{% extends 'mailing_list/base_template.html' %}
+{% block content %}
+      <article class="blog-post">
+        <h2 class="display-5 link-body-emphasis mb-1">{{object.header}}</h2>
+        <p class="blog-post-meta">{{object.date_when_created}} by <a href="#">{{user}}</a> | количество просмотров: {{object.views_count}}</p>
+        <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic typography, lists, tables, images, code, and more are all supported as expected.</p>
+        <hr>
+        <p>{{object.content}}</p>
+          <pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </pre>
+          <p>
+            <a href="{% url 'blog:edit' object.id %}">
+          <button type="submit" class="btn btn-success">Редактировать</button>
+          </a>
+          <a href="{% url 'blog:delete' object.id %}">
+         <button type="submit" class="btn btn-danger">Удалить</button>
+          </a></p>
+      </article>
+{% endblock %}
