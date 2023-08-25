@@ -1,3 +1,5 @@
+import os
+
 from django.http import Http404
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -116,7 +118,8 @@ class MessageCreateView(CreateView):
                                             start_time=message.settingsmailing.time_to_start,
                                             expires=message.settingsmailing.time_to_end,
                                             enabled=False)
-            with open('mailing_list/tasks.py', 'at') as tasks:
+            path = os.path.join('mailing_list', 'tasks.py')
+            with open(path, 'at') as tasks:
                 function_code = f"""
                 
 @shared_task(name='send_mail_{message.pk}_to_clients')
@@ -196,12 +199,6 @@ class MessageUpdateView(UpdateView):
                     expires=message.settingsmailing.time_to_end)
 
         return super().form_valid(form)
-
-    # def get_object(self, queryset=None):
-    #     object_ = super().get_object(queryset)
-    #     if self.request.user.groups.filter(name='Managers').exists():
-    #         raise Http404('Пользователь из вашей группы доступа не может редактировать рассылки')
-    #     return object_
 
 
 class MessageDeleteView(DeleteView):

@@ -5,4 +5,4 @@
 *$py.class
 /venv/
 .env
-/static/
+static/
