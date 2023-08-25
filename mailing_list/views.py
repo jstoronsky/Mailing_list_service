@@ -118,13 +118,14 @@ class MessageCreateView(CreateView):
                                             enabled=False)
             with open('mailing_list/tasks.py', 'at') as tasks:
                 function_code = f"""
+                
 @shared_task(name='send_mail_{message.pk}_to_clients')
 def send_mail_to_{message.pk}_clients():
     message = Message.objects.get(pk={message.pk})
     clients = SettingsMailing.objects.get(message=message).clients.all()
     clients_mails = [client.email for client in clients]
     try:
-        send_mail(message.header, message.body, settings.EMAIL_HOST_USER, сlients_mails)
+        send_mail(message.header, message.body, settings.EMAIL_HOST_USER, clients_mails)
         message.settingsmailing.status = 'Активна'
         message.settingsmailing.save(update_fields=['status'])
         Logs.objects.create(message=message, datetime_of_attempt=timezone.now(), status='Отправлено')
