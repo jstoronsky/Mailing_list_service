@@ -7,6 +7,9 @@ from blog.models import Blog
 
 # Create your views here.
 class BlogCreateView(CreateView):
+    """
+    контроллер для создании статьи
+    """
     model = Blog
     form_class = BlogAddForm
     success_url = reverse_lazy('blog:blog')
@@ -19,15 +22,23 @@ class BlogCreateView(CreateView):
         return super().form_valid(form)
         
 
-
 class BlogListView(ListView):
+    """
+    контроллер для спиского отображения статей
+    """
     model = Blog
 
 
 class BlogDetailView(DetailView):
+    """
+    контроллер для подробного просмотра конкретной статьи
+    """
     model = Blog
 
     def get_object(self, queryset=None):
+        """
+        метод для изменения количества просмотров
+        """
         object_ = super().get_object(queryset)
         object_.views_count += 1
         object_.save()
@@ -35,11 +46,17 @@ class BlogDetailView(DetailView):
 
 
 class BlogUpdateView(UpdateView):
+    """
+    контроллер для изменения информации по статье
+    """
     model = Blog
     form_class = BlogUpdateForm
     success_url = reverse_lazy('blog:blog')
 
 
 class BlogDeleteView(DeleteView):
+    """
+    контроллер для удаления статьи
+    """
     model = Blog
     success_url = reverse_lazy('blog:blog')

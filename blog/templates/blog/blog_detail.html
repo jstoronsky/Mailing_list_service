@@ -23,6 +23,7 @@
 
 
           </pre>
+          {% if user.is_staff or user.is_superuser %}
           <p>
             <a href="{% url 'blog:edit' object.id %}">
           <button type="submit" class="btn btn-success">Редактировать</button>
@@ -30,5 +31,6 @@
           <a href="{% url 'blog:delete' object.id %}">
          <button type="submit" class="btn btn-danger">Удалить</button>
           </a></p>
+          {% endif %}
       </article>
 {% endblock %}

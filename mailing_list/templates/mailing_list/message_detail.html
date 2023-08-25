@@ -10,7 +10,8 @@
     <p class="card-text"><b>Статус</b>:  {{object.settingsmailing.status}}</p>
     <p class="card-text"><b>Дата начала рассылки</b>:  {{object.settingsmailing.time_to_start}}</p>
     <p class="card-text"><b>Дата завершения рассылки</b>:  {{object.settingsmailing.time_to_end}}</p>
-    <p class="card-text"><b>Периодичность отправления писем</b>: every {{object.settingsmailing.every}} {{object.settings.period}}</p>
+    <p class="card-text"><b>Периодичность отправления писем</b>: every {{object.settingsmailing.every}} {{object.settingsmailing.period}}</p>
+    <p class="card-text"><b>Подключенные клиенты</b>: {{clients}}</p>
     <div class="col-sm-6">
     <a href="{% url 'mailing_list:message_update' object.pk %}" class="btn btn-primary">Редактировать</a>
       <a href="{% url 'mailing_list:delete_message' object.pk %}" class="btn btn-danger">Удалить</a>

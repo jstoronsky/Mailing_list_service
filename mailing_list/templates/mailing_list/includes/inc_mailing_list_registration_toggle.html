@@ -14,7 +14,7 @@
         <li><a class="dropdown-item" href="{% url 'users:reset' %}">Сбросить пароль</a></li>
         {% endif %}
         <li><hr class="dropdown-divider"></li>
-        {% if user.is_staff or user.is_superuser %}
+        {% if perms.users.set_is_active or user.is_superuser %}
         <li><a class="dropdown-item" href="{% url 'users:users_list' %}">Управление пользователями</a></li>
         {% endif %}
     </ul>

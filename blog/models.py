@@ -1,10 +1,12 @@
 from django.db import models
-from users.models import User
 # Create your models here.
 NULLABLE = {'blank': True, 'null': True}
 
 
 class Blog(models.Model):
+    """
+    Модель для статьи Блога
+    """
     header = models.CharField(max_length=150, verbose_name='заголовок')
     content = models.TextField(verbose_name='содержимое')
     preview = models.ImageField(upload_to='blog/', verbose_name='превью', **NULLABLE)

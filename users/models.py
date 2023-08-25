@@ -9,6 +9,9 @@ from mailing_list.models import NULLABLE
 
 # Create your models here.
 class User(AbstractUser):
+    """
+    модель пользователя
+    """
     username = None
     email = models.EmailField(verbose_name='почта', unique=True)
     is_active = models.BooleanField(default=False)

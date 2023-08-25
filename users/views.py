@@ -15,12 +15,18 @@ from config import settings
 
 # Create your views here.
 class RegisterView(CreateView):
+    """
+    контроллер для регистрации
+    """
     model = User
     form_class = RegisterForm
     template_name = 'users/user_register.html'
     success_url = reverse_lazy('users:activate')
 
     def form_valid(self, form):
+        """
+        здесь отправляем на почту код активации
+        """
         user = form.save()
         subject = 'Активация аккаунта'
         num1 = str(random.randint(0, 9))
@@ -30,16 +36,16 @@ class RegisterView(CreateView):
         random_code_list = [num1, num2, num3, num4]
         random_code = ''.join(random_code_list)
         user.verification_key = random_code
+        user.save()
         message = f'{user.first_name}, введите данный код: {user.verification_key}, чтобы активировать ваш аккаунт'
         send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email])
         return super().form_valid(form)
 
 
-# def activation_message(request):
-#     return render(request, 'user_interaction/activation_message.html')
-
-
 def activate_email(request):
+    """
+    функция-контроллер для проверки правильности кода активации
+    """
     if request.method == 'POST':
         get_code = request.POST.get('code')
 
@@ -57,6 +63,9 @@ def activate_email(request):
 
 
 def reset_password(request):
+    """
+    функция-контроллер для сброса пароля
+    """
     if request.method == 'POST':
         get_email = request.POST.get('email')
         letters = list(string.ascii_letters)
@@ -69,7 +78,6 @@ def reset_password(request):
             user = User.objects.get(email=get_email)
         except ObjectDoesNotExist:
             return render(request, 'users/unsuccessful_reset.html')
-            # return HttpResponse('Такого пользователя не существует введите другой адрес электронной почты')
         else:
             user.set_password(new_password_)
             subject = 'Сброс пароля'
@@ -82,11 +90,17 @@ def reset_password(request):
 
 
 class UserLogin(LoginView):
+    """
+    контроллер для аутентификации
+    """
     form_class = LoginForm
     template_name = 'users/login.html'
 
 
 class ChangeView(UpdateView):
+    """
+    контроллер для аутентификации
+    """
     model = User
     form_class = ChangeForm
     template_name = 'users/user_register.html'
@@ -97,6 +111,9 @@ class ChangeView(UpdateView):
 
 
 class UsersList(ListView):
+    """
+    контроллер отображения списка зарегистрированных пользователей, нужно для реализации бана
+    """
     model = User
     template_name = 'users/users_list.html'
 
@@ -108,6 +125,9 @@ class UsersList(ListView):
 
 
 class UserDeactivate(UpdateView):
+    """
+    контроллер для бана, доступно менеджерам и суперюзеру
+    """
     model = User
     fields = ('is_active',)
     template_name = 'users/user_deactivation.html'

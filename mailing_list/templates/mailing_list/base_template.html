@@ -134,7 +134,9 @@
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'mailing_list:add_message' %}">Создать рассылку</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'mailing_list:add_client' %}">Добавить клиента</a>
             {% endif %}
+            {% if user.is_staff and user.is_superuser %}
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{% url 'mailing_list:logs' %}">Логи по рассылкам</a>
+            {% endif %}
         {% endif %}
         {% include 'mailing_list/includes/inc_mailing_list_registration_toggle.html' %}
       </nav>
@@ -147,7 +149,7 @@
   <footer class="pt-4 my-md-5 pt-md-5 border-top">
     <div class="row">
       <div class="col-12 col-md">
-        <small class="d-block mb-3 text-body-secondary">&copy; 2017–2023</small>
+        <small class="d-block mb-3 text-body-secondary">&copy; 2023</small>
       </div>
       <div class="col-6 col-md">
         <h5>FAQ</h5>
